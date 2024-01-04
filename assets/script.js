@@ -19,6 +19,7 @@ pEl.textContent = "This is a quiz over basic coding facts, answering each questi
 var startButton = document.createElement('button')
 startButton.textContent = 'start'
 var timerDisplay = document.createElement ('div');
+body.appendChild(timerDisplay);
 
 // create an array of objects, objects are my questions with key value pairs for the question,
 // the answer choices, and the index of the correct answer choice
@@ -88,12 +89,22 @@ function checkAnswer(event) {
     // Display the next question
     cycleQuestion();
   }
+
+//   need to get timer to display, 
   function countdown(){
-    var timeInterval = setInterval(function)
+    var timeInterval = setInterval(function() {
     if (timeLeft > 1){
-        
+       
+    } else if (timeLeft === 1){
+         timerDisplay.textContent = timeLeft + ' second remaining';
+        timeLeft--;
+    } else {
+        timeInterval.textContent = '';
+
+        clearInterval(timeInterval); 
     }
-  }
+  }, 1000);
+}
 
 function startQuiz() {
     startButton.style.display = 'none';
@@ -103,7 +114,8 @@ function startQuiz() {
     cycleQuestion();
 
     // display timer by appending it to the body
-    body.appendChild(timerDisplay);
+    
+    countdown()
 }
 startButton.addEventListener("click", startQuiz ) 
 
